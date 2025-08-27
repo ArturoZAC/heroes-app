@@ -12,16 +12,16 @@ export const CustomMenu = () => {
   }
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="py-5">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={cn( isActive('/') && "bg-slate-200","rounded-md p-2 font-medium")}>
+          <NavigationMenuLink asChild className={cn(isActive('/') && "bg-slate-200", "rounded-md p-2 font-medium")}>
             <Link to='/'>Inicio</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={cn( isActive('/search') && "bg-slate-200","rounded-md p-2 font-medium")}>
+          <NavigationMenuLink asChild className={cn(isActive('/search') && "bg-slate-200", "rounded-md p-2 font-medium")}>
             <Link to='/search'>Buscar Superheroes</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
