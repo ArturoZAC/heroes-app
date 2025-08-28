@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { use, useEffect, useMemo } from "react"
 import { useSearchParams } from "react-router"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,11 +9,13 @@ import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadCrumbs } from "@/components/custom/CustomBreadCrumbs"
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
 import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
+import { FavoriteHeroContext } from "@/context/FavoriteHeroContext"
 
 const validTabs = ['all', 'favorites', 'heroes', 'villains'];
 export const HomePage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const { favoriteCount, favorites } = use(FavoriteHeroContext);
 
   const page = searchParams.get('page') ?? '1';
   const limit = searchParams.get('limit') ?? '6';
@@ -61,7 +63,7 @@ export const HomePage = () => {
               // prev.set('category', 'hero');
               // prev.set('page', '1');
               return prev
-            })} className="flex items-center gap-2">Favorites (3)</TabsTrigger>
+            })} className="flex items-center gap-2">Favorites ({favoriteCount})</TabsTrigger>
             <TabsTrigger value="heroes" onClick={() => setSearchParams((prev) => {
               prev.set('tab', 'heroes');
               prev.set('category', 'hero');
@@ -80,20 +82,21 @@ export const HomePage = () => {
             <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
           <TabsContent value="favorites">
-            <h1>Todos los favoritos</h1>
-            {/* <HeroGrid heroes={heroesResponse?.heroes ?? []} /> */}
+            <HeroGrid heroes={favorites} />
           </TabsContent>
           <TabsContent value="heroes">
-            <h1>Todos los heroes</h1>
             <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
           <TabsContent value="villains">
-            <h1>Todos los villanos</h1>
             <HeroGrid heroes={heroesResponse?.heroes ?? []} />
           </TabsContent>
         </Tabs>
 
-        <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+        {
+          selectedTab !== 'favorites' && (
+            <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+          )
+        }
       </>
     </>
   )
