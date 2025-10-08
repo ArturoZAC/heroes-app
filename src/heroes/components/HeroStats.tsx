@@ -7,7 +7,6 @@ import { HeroStatCard } from "./HeroStatCard";
 import { useHeroSummary } from "../hooks/useHeroSummary";
 
 export const HeroStats = () => {
-
   const { data: summary } = useHeroSummary();
   const { favoriteCount } = use(FavoriteHeroContext);
 
@@ -16,7 +15,7 @@ export const HeroStats = () => {
       <div className="flex flex-col items-center justify-center min-h-[300px]">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
       </div>
-    )
+    );
   }
 
   return (
@@ -41,26 +40,30 @@ export const HeroStats = () => {
         icon={<Heart className="h-4 w-4 text-muted-foreground" />}
       >
         <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
-        <p className="text-xs text-muted-foreground">{((favoriteCount * 100) / (summary?.totalHeroes)).toFixed(2)}% of total</p>
+        <p className="text-xs text-muted-foreground">
+          {((favoriteCount * 100) / summary?.totalHeroes).toFixed(2)}% of total
+        </p>
       </HeroStatCard>
 
       <HeroStatCard
         title="Fuerte"
         icon={<Zap className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-lg font-bold">{summary?.strongestHero.alias}</div>
-        <p className="text-xs text-muted-foreground">Strength: {summary?.strongestHero.strength}/10</p>
+        <div className="text-lg font-bold">{summary?.strongestHero?.alias}</div>
+        <p className="text-xs text-muted-foreground">
+          Strength: {summary?.strongestHero?.strength}/10
+        </p>
       </HeroStatCard>
-
 
       <HeroStatCard
         title="Inteligente"
         icon={<Trophy className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-lg font-bold">{summary?.smartestHero.alias}</div>
-        <p className="text-xs text-muted-foreground">Intelligence: {summary?.smartestHero.intelligence}/10</p>
+        <div className="text-lg font-bold">{summary?.smartestHero?.alias}</div>
+        <p className="text-xs text-muted-foreground">
+          Intelligence: {summary?.smartestHero?.intelligence}/10
+        </p>
       </HeroStatCard>
-
     </div>
-  )
+  );
 };
