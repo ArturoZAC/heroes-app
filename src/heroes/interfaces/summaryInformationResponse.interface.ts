@@ -1,9 +1,9 @@
 import type { Hero } from "./hero.interface";
 
 export interface SummaryInformationResponse {
-  totalHeroes  : number;
+  totalHeroes: number;
   strongestHero: Hero;
-  smartestHero : Hero;
-  heroCount    : number;
-  villainCount : number;
+  smartestHero: Hero;
+  heroCount: number;
+  villainCount: number;
 }
