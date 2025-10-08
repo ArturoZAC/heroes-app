@@ -1,4 +1,9 @@
-import { createContext, useEffect, useState, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
 import type { Hero } from "@/heroes/interfaces/hero.interface";
 
 interface FavoriteHeroContextProps {
@@ -10,22 +15,29 @@ interface FavoriteHeroContextProps {
 }
 
 const getFavoritesFromLocalStorage = (): Hero[] => {
-  const favorites = localStorage.getItem('favorites');
+  const favorites = localStorage.getItem("favorites");
   return favorites ? JSON.parse(favorites) : [];
-}
+};
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const FavoriteHeroContext = createContext({} as FavoriteHeroContextProps);
+export const FavoriteHeroContext = createContext(
+  {} as FavoriteHeroContextProps
+);
 
 export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
-
-  const [favorites, setFavorites] = useState<Hero[]>(getFavoritesFromLocalStorage());
+  const [favorites, setFavorites] = useState<Hero[]>(
+    getFavoritesFromLocalStorage()
+  );
 
   const toggleFavorite = (hero: Hero) => {
-    const heroExist = favorites.find((heroFavorite) => heroFavorite.id === hero.id);
+    const heroExist = favorites.find(
+      (heroFavorite) => heroFavorite.id === hero.id
+    );
 
     if (heroExist) {
-      const newFavorites = favorites.filter((heroFavorite) => heroFavorite.id !== hero.id);
+      const newFavorites = favorites.filter(
+        (heroFavorite) => heroFavorite.id !== hero.id
+      );
       setFavorites(newFavorites);
       return;
     }
@@ -41,7 +53,7 @@ export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
   };
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   return (
@@ -51,7 +63,7 @@ export const FavoriteHeroProvider = ({ children }: PropsWithChildren) => {
         favorites: favorites,
 
         isFavorite: isFavorite,
-        toggleFavorite: toggleFavorite
+        toggleFavorite: toggleFavorite,
       }}
     >
       {children}
