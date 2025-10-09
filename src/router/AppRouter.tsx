@@ -7,39 +7,39 @@ import { HomePage } from "@/heroes/pages/home/HomePage";
 // import { SearchPage } from "@/heroes/pages/search/SearchPage";
 import { lazy } from "react";
 
-const SearchPage = lazy(() => import('@/heroes/pages/search/SearchPage'));
+const SearchPage = lazy(() => import("@/heroes/pages/search/SearchPage"));
 
 export const appRouter = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HeroesLayout />,
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
-        path: 'heroes/:idSlug',
-        element: <HeroPage />
+        path: "heroes/:idSlug",
+        element: <HeroPage />,
       },
       {
-        path: 'search',
-        element: <SearchPage />
+        path: "search",
+        element: <SearchPage />,
       },
       {
-        path: '*',
-        element: <Navigate to='/'/>
-      }
-    ]
+        path: "*",
+        element: <Navigate to="/" />,
+      },
+    ],
   },
   {
-    path: '/admin',
+    path: "/admin",
     element: <AdminLayout />,
     children: [
       {
         index: true,
-        element: <AdminPage />
-      }
-    ]
+        element: <AdminPage />,
+      },
+    ],
   },
-])
+]);
