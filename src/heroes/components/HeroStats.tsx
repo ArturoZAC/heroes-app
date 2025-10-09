@@ -13,7 +13,9 @@ export const HeroStats = () => {
   if (!summary) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[300px]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4">
+          Loading...
+        </div>
       </div>
     );
   }
@@ -39,8 +41,16 @@ export const HeroStats = () => {
         title="Favoritos"
         icon={<Heart className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
-        <p className="text-xs text-muted-foreground">
+        <div
+          className="text-2xl font-bold text-red-600"
+          data-testid="favorite-count"
+        >
+          {favoriteCount}
+        </div>
+        <p
+          className="text-xs text-muted-foreground"
+          data-testid="favorite-percentage"
+        >
           {((favoriteCount * 100) / summary?.totalHeroes).toFixed(2)}% of total
         </p>
       </HeroStatCard>
